@@ -10,18 +10,25 @@ export default class Greeting extends React.Component {
       name: "Mary",
       surname: "Petter",
       locale: "en",
+      width: window.innerWidth,
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSurNameChange = this.handleSurNameChange.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
 
   componentDidMount() {
     document.title = this.state.name + " " + this.state.surname;
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentDidUpdate() {
     document.title = this.state.name + " " + this.state.surname;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize");
   }
 
   handleNameChange(e) {
@@ -33,6 +40,12 @@ export default class Greeting extends React.Component {
   handleSurNameChange(e) {
     this.setState({
       surname: e.target.value,
+    });
+  }
+
+  handleResize() {
+    this.setState({
+      width: window.innerWidth,
     });
   }
 
@@ -53,10 +66,13 @@ export default class Greeting extends React.Component {
             <LocaleContext.Consumer>
               {(locale) => (
                 <Row label="locale">
-                  <input value={locale} disabled/>
+                  <input value={locale} disabled />
                 </Row>
               )}
             </LocaleContext.Consumer>
+            <Row label="Width">
+              <input value={this.state.width} disabled />
+            </Row>
           </section>
         )}
       </ThemeContext.Consumer>
