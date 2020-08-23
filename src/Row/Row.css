@@ -1,9 +1,10 @@
 .row {
-  background:white;
+  background: white;
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 1rem 0;
+  padding: 0 1.5rem 0;
+  position: relative;
 }
 
 .row:last-child {
@@ -25,11 +26,62 @@ input {
   padding: 0.6rem 0.5rem;
 }
 
-input:focus{
-  border-color: #66afe9;
+input:focus {
+  border-color: red;
   border-radius: 0.5rem;
-  background: #66afe9;
+  background: red;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+section.red .row {
+  background: red;
+}
+
+section.red label {
+  color: white;
+}
+
+section.red input {
+  background: red;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+section.yellow .row {
+  background: #ffb423;
+}
+
+section.yellow input {
+  background: #ffb423;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+section.yellow input:focus {
+  border-color: #ffb423;
+  border-radius: 0.5rem;
+  background: #ffb423;
+  outline: 0;
+}
+
+section.yellow .label {
+  color: black;
+  text-align: center;
+}
+
+section.yellow .label:before,
+section.yellow .label:after {
+  position: absolute;
+  margin-top: 0.4rem;
+  background:grey;
+  content: "";
+  height: 1px;
+  width: 100px;
+}
+
+section.yellow .label:before {
+  left: 0.5rem;
+}
+section.yellow .label:after {
+  right: 0.5rem;
 }
