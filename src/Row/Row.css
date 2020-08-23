@@ -1,0 +1,22 @@
+.row {
+  background:white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  padding: 0.6rem 0;
+  color: grey;
+  text-align: left;
+}
+
+input {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: white;
+  border: none;
+  padding: 0.6rem 0;
+}
