@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Row from "../Row/Row";
 import { ThemeContext, LocaleContext } from "../Context";
 
@@ -7,6 +7,10 @@ export default function Greeting(props) {
   const [surname, setSurName] = useState("Petter");
   const theme = useContext(ThemeContext);
   const locale = useContext(LocaleContext);
+
+  useEffect(() => {
+    document.title = name + " " + surname;
+  })
 
   function handleNameChange(e) {
     setName(e.target.value);
