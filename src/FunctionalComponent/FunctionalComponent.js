@@ -8,12 +8,8 @@ export default function Greeting(props) {
   const theme = useContext(ThemeContext);
   const locale = useContext(LocaleContext);
   const width = useWindowWidth();
-
-  useEffect(() => {
-    document.title = name + " " + surname;
-  })
-
-
+  
+  useDocumentTitle(name + " " + surname);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -40,14 +36,20 @@ export default function Greeting(props) {
   );
 }
 
+function useDocumentTitle(title) {
+  useEffect(() => {
+    document.title = title;
+  });
+}
+
 function useWindowWidth() {
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth)
-    window.addEventListener("resize", handleResize)
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
-    }
-  })
+    };
+  });
   return width;
 }
