@@ -9,8 +9,8 @@ import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Route exact path="/app1" component={App1} />
-      <Route exact path="/app2" component={App2} />
+      <Route exact path="/fc" component={App1} />
+      <Route exact path="/cc" component={App2} />
     </Router>
   </React.StrictMode>,
   document.getElementById("root")
