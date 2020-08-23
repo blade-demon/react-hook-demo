@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   padding: 0 1.5rem 0;
-  position: relative;
 }
 
 .row:last-child {
@@ -26,25 +25,24 @@ input {
   padding: 0.6rem 0.5rem;
 }
 
-input:focus {
-  border-color: red;
-  border-radius: 0.5rem;
-  background: red;
-  outline: 0;
-}
-
 section.red .row {
   background: red;
 }
 
 section.red label {
-  color: white;
+  color: black;
 }
 
-section.red input {
+section.red .row input {
   background: red;
   color: white;
-  border-radius: 0.5rem;
+  border-bottom: 1px solid black;
+}
+
+section.red input:focus {
+  border-color: red;
+  background: red;
+  border: none;
 }
 
 section.yellow .row {
@@ -67,21 +65,23 @@ section.yellow input:focus {
 section.yellow .label {
   color: black;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-section.yellow .label:before,
-section.yellow .label:after {
-  position: absolute;
+section.yellow label::before,
+section.yellow label::after {
   margin-top: 0.4rem;
-  background:grey;
+  background: #65656573;
   content: "";
   height: 1px;
-  width: 100px;
+  width: 2rem;
+  flex: 1;
 }
 
-section.yellow .label:before {
-  left: 0.5rem;
+section.yellow label:before {
+  margin-right: 1rem;
 }
-section.yellow .label:after {
-  right: 0.5rem;
+section.yellow label:after {
+  margin-left: 1rem;
 }

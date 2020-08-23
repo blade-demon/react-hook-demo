@@ -1,5 +1,5 @@
 import React from "react";
-import './Row.css'
+import "./Row.css";
 
 export default function Row(props) {
   return (

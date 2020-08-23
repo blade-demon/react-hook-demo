@@ -28,7 +28,7 @@ export default class Greeting extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize");
+    window.removeEventListener("resize", this.handleResize);
   }
 
   handleNameChange(e) {
