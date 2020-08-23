@@ -3,28 +3,21 @@ import Row from "../Row/Row";
 import { ThemeContext, LocaleContext } from "../Context";
 
 export default function Greeting(props) {
-  const [name, setName] = useState("Mary");
-  const [surname, setSurName] = useState("Petter");
+  const name = useFormInput("Mary");
+  const surname = useFormInput("Petter");
   const theme = useContext(ThemeContext);
   const locale = useContext(LocaleContext);
   const width = useWindowWidth();
-  
-  useDocumentTitle(name + " " + surname);
+  useDocumentTitle(name.value + " " + surname.value);
 
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
-  function handleSurNameChange(e) {
-    setSurName(e.target.value);
-  }
 
   return (
     <section className={theme}>
       <Row label="Name">
-        <input value={name} onChange={handleNameChange} />
+        <input {...name} />
       </Row>
       <Row label="Surname">
-        <input value={surname} onChange={handleSurNameChange} />
+        <input {...surname} />
       </Row>
       <Row label="Language">
         <input value={locale} disabled />
@@ -34,6 +27,19 @@ export default function Greeting(props) {
       </Row>
     </section>
   );
+}
+
+function useFormInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  function handleChange(e) {
+    setValue(e.target.value);
+  }
+
+  return {
+    value,
+    onChange: handleChange
+  }
 }
 
 function useDocumentTitle(title) {
