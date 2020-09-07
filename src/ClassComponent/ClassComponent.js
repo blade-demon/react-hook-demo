@@ -73,10 +73,7 @@ export default class Greeting extends React.Component {
                 />
               </Row>
               <Row label="Width">
-                <input
-                  value={this.state.width}
-                  onChange={this.handleWidthChange}
-                />
+                <input value={this.state.width} disabled />
               </Row>
               <LocaleContext.Consumer>
                 {(locale) => {

@@ -2,35 +2,58 @@ import React, { useState, useEffect, useContext } from "react";
 import Row from "../Row/Row";
 import { ThemeContext, LocaleContext } from "../Context";
 
-export default function Greeting(props) {
-  const [name, setName] = useState("Mary");
-  const [surName, setSurName] = useState("Petter");
-  const [width, setWidth] = useState(window.innerWidth);
-  const locale = useContext(LocaleContext);
-  const theme = useContext(ThemeContext);
+function useWindowWidth(initialValue) {
+  const [width, setWidth] = useState(initialValue);
 
   useEffect(() => {
-    document.title = name + ' ' + surName;
-  });
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
-    }
+    };
   });
 
   function handleResize() {
     return setWidth(window.innerWidth);
   }
 
+  return width;
+}
+
+function useFormInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  function handleChange(e) {
+    setValue(e.target.value);
+  }
+
+  return {
+    value,
+    onChange: handleChange,
+  };
+}
+
+function useDocumentTitle(initialValue) {
+  useEffect(() => {
+    document.title = initialValue;
+  });
+}
+
+export default function Greeting(props) {
+  const name = useFormInput("Mary");
+  const surName = useFormInput("Petter");
+  const width = useWindowWidth(window.innerWidth);
+  const locale = useContext(LocaleContext);
+  const theme = useContext(ThemeContext);
+
+  useDocumentTitle(name.value + " " + surName.value);
+
   return (
     <section className={theme}>
       <Row label="Name">
-        <input value={name} onChange={(e) => setName(e.target.value)} />
+        <input {...name} />
       </Row>
       <Row label="SurName">
-        <input value={surName} onChange={(e) => setSurName(e.target.value)} />
+        <input {...surName} />
       </Row>
       <Row label="Width">
         <input value={width} disabled />
