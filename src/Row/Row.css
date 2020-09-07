@@ -25,6 +25,10 @@ input {
   padding: 0.6rem 0.5rem;
 }
 
+input:focus {
+  border-color: blue;
+  border-radius: 0.5rem;
+}
 section.red .row {
   background: red;
 }
