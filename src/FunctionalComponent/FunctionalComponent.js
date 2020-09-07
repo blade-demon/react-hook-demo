@@ -7,7 +7,7 @@ export default function Greeting(props) {
 
   useEffect(() => {
     document.title = name + ' ' + surName;
-  }, []);
+  });
 
   return (
     <section>

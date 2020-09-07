@@ -18,6 +18,10 @@ export default class Greeting extends React.Component {
     document.title = this.state.name + ' ' + this.state.surName;
   }
 
+  componentDidUpdate() {
+    document.title = this.state.name + ' ' + this.state.surName;
+  }
+
   handleNameChange(e) {
     this.setState({
       name: e.target.value,
