@@ -1,5 +1,6 @@
 import React from "react";
 import Row from "../Row/Row";
+import { ThemeContext, LocaleContext } from "../Context";
 
 export default class Greeting extends React.Component {
   constructor(props) {
@@ -55,20 +56,41 @@ export default class Greeting extends React.Component {
 
   render() {
     return (
-      <section>
-        <Row label="Name">
-          <input value={this.state.name} onChange={this.handleNameChange} />
-        </Row>
-        <Row label="SurName">
-          <input
-            value={this.state.surName}
-            onChange={this.handleSurNameChange}
-          />
-        </Row>
-        <Row label="Width">
-          <input value={this.state.width} onChange={this.handleWidthChange} />
-        </Row>
-      </section>
+      <ThemeContext.Consumer>
+        {(theme) => {
+          return (
+            <section className={theme}>
+              <Row label="Name">
+                <input
+                  value={this.state.name}
+                  onChange={this.handleNameChange}
+                />
+              </Row>
+              <Row label="SurName">
+                <input
+                  value={this.state.surName}
+                  onChange={this.handleSurNameChange}
+                />
+              </Row>
+              <Row label="Width">
+                <input
+                  value={this.state.width}
+                  onChange={this.handleWidthChange}
+                />
+              </Row>
+              <LocaleContext.Consumer>
+                {(locale) => {
+                  return (
+                    <Row label="Locale">
+                      <input value={locale} disabled />
+                    </Row>
+                  );
+                }}
+              </LocaleContext.Consumer>
+            </section>
+          );
+        }}
+      </ThemeContext.Consumer>
     );
   }
 }

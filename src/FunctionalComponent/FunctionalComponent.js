@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Row from "../Row/Row";
+import { ThemeContext, LocaleContext } from "../Context";
 
 export default function Greeting(props) {
   const [name, setName] = useState("Mary");
   const [surName, setSurName] = useState("Petter");
   const [width, setWidth] = useState(window.innerWidth);
+  const locale = useContext(LocaleContext);
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     document.title = name + ' ' + surName;
@@ -22,7 +25,7 @@ export default function Greeting(props) {
   }
 
   return (
-    <section>
+    <section className={theme}>
       <Row label="Name">
         <input value={name} onChange={(e) => setName(e.target.value)} />
       </Row>
@@ -31,6 +34,9 @@ export default function Greeting(props) {
       </Row>
       <Row label="Width">
         <input value={width} disabled />
+      </Row>
+      <Row label="Locale">
+        <input value={locale} disabled />
       </Row>
     </section>
   );
