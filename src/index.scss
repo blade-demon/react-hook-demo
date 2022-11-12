@@ -4,12 +4,7 @@
 }
 
 $skeletonLoadingGradientWidth: 1200px;
-$skeletonLoadingGradient: linear-gradient(
-  to right,
-  rgba(#8c8c8c, 0.05) 0%,
-  rgba(#8c8c8c, 0.1) 15%,
-  rgba(#8c8c8c, 0.05) 30%
-);
+$skeletonLoadingGradient: linear-gradient(to right, rgba(#8c8c8c, 0.05) 0%, rgba(#8c8c8c, 0.1) 15%, rgba(#8c8c8c, 0.05) 30%);
 
 @keyframes loading {
   0% {
@@ -32,13 +27,15 @@ $skeletonLoadingGradient: linear-gradient(
     border-radius: 3px;
     margin: 0.25rem 0;
   }
-
+  
   &.sidebar-loading {
     width: 100%;
     height: 3rem;
     margin: 0.25rem 0;
   }
 }
+
+
 
 .layout {
   display: flex;

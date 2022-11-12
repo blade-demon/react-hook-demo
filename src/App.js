@@ -1,14 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useData } from "./useData";
-// import {
-//   commentsUrl,
-//   issueUrl,
-//   sidebarUrl,
-//   SidebarType,
-//   IssueType,
-//   CommentType,
-//   useData,
-// } from "./data";
+import React from "react";
+import { commentsUrl, issueUrl, sidebarUrl, useData } from "./data";
 
 const LoadingSidebar = () => (
   <>
@@ -39,40 +30,59 @@ const LoadingScreen = () => {
   );
 };
 
-fetch(
-  "https://run.mocky.io/v3/98b3aa11-54c3-42ca-8cc7-e2c68f42082f?mocky-delay=10000ms&id=1"
-);
-fetch(
-  "https://run.mocky.io/v3/98b3aa11-54c3-42ca-8cc7-e2c68f42082f?mocky-delay=10000ms&id=2"
-);
-fetch(
-  "https://run.mocky.io/v3/98b3aa11-54c3-42ca-8cc7-e2c68f42082f?mocky-delay=10000ms&id=3"
-);
-fetch(
-  "https://run.mocky.io/v3/98b3aa11-54c3-42ca-8cc7-e2c68f42082f?mocky-delay=10000ms&id=4"
-);
+const Sidebar = ({ data }) => {
+  console.log(data);
 
-fetch(
-  "https://run.mocky.io/v3/98b3aa11-54c3-42ca-8cc7-e2c68f42082f?mocky-delay=10000ms&id=6"
-);
+  return (
+    <div className="sidebar sidebar-base">
+      <ul>
+        {Array.isArray(data) &&
+          data.length > 0 &&
+          data?.map(({ name, id }) => <li key={id}>{name}</li>)}
+      </ul>
+    </div>
+  );
+};
 
-fetch(
-  "https://run.mocky.io/v3/98b3aa11-54c3-42ca-8cc7-e2c68f42082f?mocky-delay=10000ms&id=6"
-);
+const Comments = () => {
+  const { data } = useData(`${commentsUrl}`);
+
+  if (!data) return <div className="loading issue-loading" />;
+
+  return (
+    <div className="comments">
+      <ul>
+        {Array.isArray(data) &&
+          data.length > 0 &&
+          data?.map(({ id, comment }) => <li key={id}>{comment}</li>)}
+      </ul>
+    </div>
+  );
+};
+
+const Issue = () => {
+  const { data } = useData(`${issueUrl}`);
+
+  if (!data) return <LoadingIssue />;
+
+  return (
+    <div className="issue">
+      <h3>{data.author}</h3>
+      <p>{data.description}</p>
+      <Comments />
+    </div>
+  );
+};
 
 const App = () => {
-  const { data } = useData(
-    "https://run.mocky.io/v3/98b3aa11-54c3-42ca-8cc7-e2c68f42082f?mocky-delay=10ms"
-  );
+  const { data: sidebar } = useData(`${sidebarUrl}`);
 
-  if (!data) return <LoadingScreen />;
+  if (!sidebar) return <LoadingScreen />;
 
   return (
     <div className="layout">
-      <div className="issue">
-        <h3>{data.author}</h3>
-        <p>{data.description}</p>
-      </div>
+      <Sidebar data={sidebar} />
+      <Issue />
     </div>
   );
 };
